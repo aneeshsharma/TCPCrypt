@@ -1,5 +1,14 @@
 import socket
 
+HEADER_SIZE = 32
+def make_header(length):
+    header_format = '{:<' + str(HEADER_SIZE) + '}'
+    return header_format.format(length)
+
+def get_length(header):
+    return int(header.strip())
+
+
 class Connection:
     def __init__(self, hostname="localhost", port=8000):
         self.hostname = str(hostname)
@@ -28,11 +37,15 @@ class Connection:
             yield client_connection
 
     def send(self, message):
-        data = '{:<256}'.format(message).encode('utf-8')
-        return self.socket.send(data)
+        length = len(message)
+        header = make_header(length)
+        self.socket.send(header.encode('utf-8'))
+        self.socket.send(message.encode('utf-8'))
 
     def recv(self):
-        return self.socket.recv(256)
+        header = self.socket.recv(HEADER_SIZE)
+        length = get_length(header)
+        return self.socket.recv(length).decode('utf-8')
 
     def close(self):
         self.socket.close()
