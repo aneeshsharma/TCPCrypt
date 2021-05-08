@@ -1,6 +1,6 @@
 from Connection import Connection
 
-conn = Connection("localhost", 1234)
+conn = Connection("0.0.0.0", 1234)
 
 server = conn.get_server(10)
 
