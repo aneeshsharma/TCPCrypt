@@ -7,5 +7,5 @@ setup(
     description='An encrypted TCP communication libarary',
     author='Anish Sharma',
     license='GPLv3.0-or-later',
-    install_requires=['cryptography']
+    install_requires=['cryptography>=3.4']
 )
