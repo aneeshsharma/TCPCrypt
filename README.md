@@ -1,4 +1,4 @@
-# PyComm
+# TCPCrypt
 An easy to use encrypted communication library for Python (using TCP)
 
 ## Installation
